@@ -1,0 +1,13 @@
+{
+  "name": "ih_email",
+  "version": "1.0.0",
+  "description": "Email Plugin for intraHouse Cherry",
+  "main": "ih_email.js",
+  "dependencies": {
+    "nodemailer": "^4.6.2"
+  },
+  "devDependencies": {},
+
+  "author": "INTRA",
+  "license": "MIT"
+}

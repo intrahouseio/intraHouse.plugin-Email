@@ -1,0 +1,7 @@
+{
+    "id":"ih_email",
+    "description":"Email plugin",
+    "cross":true,
+    "service":true,
+	"version":"1.0.0"
+}

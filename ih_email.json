@@ -1,0 +1,52 @@
+{
+  "name": "ih_email",
+  "description": "Email plugin",
+  "module": "ih_email.js",
+  "service": 1,
+  "single": 1,
+
+  "params": [
+    {
+      "name": "service",
+      "note": "Почтовый сервис",
+      "type": "droplist",
+      "data": [
+        { "id": "-", "name": "-" },
+        { "id": "Gmail", "name": "Gmail" },
+        { "id": "Mail.ru", "name": "Mail.ru" },
+        { "id": "Hotmail", "name": "Hotmail" },
+        { "id": "iCloud", "name": "iCloud" },
+        { "id": "Yahoo", "name": "Yahoo" },
+        { "id": "Yandex", "name": "Yandex.ru" }
+      ]
+    },
+    {
+      "name": "host",
+      "note": "Адрес (host) почтового сервера",
+      "type": "string",
+      "val": "mail.ru",
+      "visible": "data.service.length <2"
+    },
+    {
+      "name": "port",
+      "note": "Порт почтового сервера",
+      "type": "string",
+      "val": "465",
+      "visible": "data.service.length <2"
+    },
+    {
+      "name": "user",
+      "note": "Адрес отправителя",
+      "type": "string",
+      "val": "486016@gmail.com"
+    },
+    {
+      "name": "pass",
+      "note": "Password",
+      "type":"password",
+      "val": ""
+    }
+  ],
+
+  "actions": [{}]
+}
