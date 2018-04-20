@@ -1,0 +1,6 @@
+{
+    "id":"email",
+    "description":"Email plugin",
+    "cross":true,
+	"version":"1.0.1"
+}

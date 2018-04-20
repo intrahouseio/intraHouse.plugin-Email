@@ -1,9 +1,9 @@
 {
-  "name": "ih_email",
+  "name": "email",
   "description": "Email plugin",
   "module": "ih_email.js",
-  "service": 1,
-  "single": 1,
+  "service": "info",
+  "single": true,
 
   "params": [
     {
