@@ -25,14 +25,14 @@
       "note": "Адрес (host) почтового сервера",
       "type": "string",
       "val": "mail.ru",
-      "visible": "data.service.length <2"
+      "visible": "data.service && data.service.length <2"
     },
     {
       "name": "port",
       "note": "Порт почтового сервера",
       "type": "string",
       "val": "465",
-      "visible": "data.service.length <2"
+      "visible": "data.service && data.service.length <2"
     },
     {
       "name": "user",
@@ -42,10 +42,11 @@
     },
     {
       "name": "pass",
-      "note": "Password",
+      "note": "Пароль",
       "type":"password",
       "val": ""
     }
+
   ],
 
   "actions": [{}]
