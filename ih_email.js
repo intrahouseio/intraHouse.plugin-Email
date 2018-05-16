@@ -24,7 +24,8 @@ function next() {
 
     case 1:
       // Подписка на событие send
-      process.send({ type: "sub", id:"1",  event:"send", filter:{type:"email"}  });
+      process.send({ type: "sub", id:"1",  event:"sendinfo", filter:{type:"email"}  });
+
       step = 2;
       break;
     
