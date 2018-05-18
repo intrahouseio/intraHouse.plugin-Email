@@ -38,7 +38,7 @@
       "name": "user",
       "note": "Адрес отправителя",
       "type": "string",
-      "val": "486016@gmail.com"
+      "val": "xxxxxx@mail.ru"
     },
     {
       "name": "pass",
