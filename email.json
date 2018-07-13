@@ -2,13 +2,13 @@
   "name": "email",
   "description": "Email plugin",
   "module": "ih_email.js",
-  "service": "info",
+  "service": "sendinfo",
   "single": true,
 
   "params": [
     {
       "name": "service",
-      "note": "Почтовый сервис",
+      "note": "$mailservice",
       "type": "droplist",
       "data": [
         { "id": "-", "name": "-" },
@@ -22,27 +22,27 @@
     },
     {
       "name": "host",
-      "note": "Адрес (host) почтового сервера",
+      "note": "$host",
       "type": "string",
-      "val": "mail.ru",
+      "val": "gmail.com",
       "visible": "data.service && data.service.length <2"
     },
     {
       "name": "port",
-      "note": "Порт почтового сервера",
+      "note": "$port",
       "type": "string",
       "val": "465",
       "visible": "data.service && data.service.length <2"
     },
     {
       "name": "user",
-      "note": "Адрес отправителя",
+      "note": "$user",
       "type": "string",
-      "val": "xxxxxx@mail.ru"
+      "val": "xxxxxx@gmail.com"
     },
     {
       "name": "pass",
-      "note": "Пароль",
+      "note": "$password",
       "type":"password",
       "val": ""
     }

@@ -1,63 +1,49 @@
 /**
- * ih_email.js
- * Сервисный плагин для SMS
- * 
+ * intraHouse service plugin
+ *
+ * E-mail sender
  */
+
 const util = require("util");
 const fs = require("fs");
-
 
 const logger = require("./lib/logger");
 const plugin = require("./lib/plugin");
 
 let step = 0;
-plugin.start(process.argv[2]);
+let unitId = process.argv[2];
+
+plugin.start(unitId);
 next();
 
 function next() {
   switch (step) {
     case 0:
-      // Получить параметры почтового сервера и опции 
-      getTable("params");
-      step = 1;
+      process.send({ type: "get", tablename: "params" });
       break;
 
     case 1:
-      // Подписка на событие send
-      process.send({ type: "sub", id:"1",  event:"sendinfo", filter:{type:"email"}  });
-
-      step = 2;
+      process.send({ type: "sub", id: "1", event: "sendinfo", filter: { type: unitId }});
       break;
-    
-    case 2:
-       // Подписка подтверждена - основный цикл  
-       step = 3;
-       break;
 
     default:
   }
+  step++;
 }
 
-function getTable(name) {
-  process.send({ type: "get", tablename: name });
-}
-
-
-/******************************** Входящие от IH ****************************************************/
-process.on("message", function(message) {
+process.on("message", (message) => {
   if (!message) return;
-  if (typeof message == "string") {
-    if (message == "SIGTERM") {
+
+  if (typeof message == "string" && message == "SIGTERM") {
       process.exit();
-    }
   }
+  
   if (typeof message == "object" && message.type) {
     parseMessageFromServer(message);
   }
 });
 
 function parseMessageFromServer(message) {
-  
   switch (message.type) {
     case "get":
       if (message.params) {
@@ -68,26 +54,24 @@ function parseMessageFromServer(message) {
       break;
 
     case "sub":
-      // Ошибка подписки - выходим!
-       if (message.error) {      
-           logger.log('sub error:' + util.inspect(message));
-           process.exit(1);
-       }
+      if (message.error) {
+        logger.log("sub error:" + util.inspect(message));
+        process.exit(1);
+      }
 
-       // Подтверждение подписки
-       if (step < 3) next();
+      if (step < 3) next();
 
-       if (message.data && typeof message.data == 'object') {
-           plugin.sendMail(message.data.txt, message.data.sendTo, plugin.params);
-       }   
-
-       break;
+      if (message.data && typeof message.data == "object") {
+        plugin.sendMail(message.data.txt, message.data.sendTo, plugin.params);
+      }
+      break;
 
     case "debug":
       if (message.mode) logger.setDebug(message.mode);
       break;
 
     default:
+      logger.log("Unknown type:" + util.inspect(message));
   }
 }
 
