@@ -38,7 +38,7 @@
       "name": "user",
       "note": "$user",
       "type": "string",
-      "val": "xxxxxx@gmail.com"
+      "val": ""
     },
     {
       "name": "pass",
