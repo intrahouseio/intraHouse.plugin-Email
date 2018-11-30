@@ -24,7 +24,7 @@
       "name": "host",
       "note": "$host",
       "type": "string",
-      "val": "gmail.com",
+      "val": "",
       "visible": "data.service && data.service.length <2"
     },
     {
