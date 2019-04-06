@@ -3,7 +3,7 @@
   "description": "Email plugin",
   "module": "ih_email.js",
   "service": "sendinfo",
-  "single": true,
+  "single": 0,
 
   "params": [
     {
