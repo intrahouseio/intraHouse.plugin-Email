@@ -5,7 +5,7 @@
  */
 
 const util = require("util");
-const fs = require("fs");
+const path = require("path");
 
 const logger = require("./lib/logger");
 const plugin = require("./lib/plugin");
@@ -29,8 +29,9 @@ function next() {
         type: "sub",
         id: "1",
         event: "sendinfo",
-        filter: { type: unitId }
+        filter: { type: 'email'}
       });
+     
       break;
 
     default:
@@ -51,6 +52,7 @@ process.on("message", message => {
 });
 
 function parseMessageFromServer(message) {
+
   switch (message.type) {
     case "get":
       if (message.params) {
@@ -79,7 +81,8 @@ function parseMessageFromServer(message) {
       if (step < 3) next();
 
       if (message.data && typeof message.data == "object") {
-        plugin.sendMail(message.data.txt, message.data.sendTo, plugin.params);
+        let attachments = getAttachments(message.data.img)
+        plugin.sendMail(message.data.txt, message.data.sendTo, plugin.params, attachments);
       }
       break;
 
@@ -90,6 +93,20 @@ function parseMessageFromServer(message) {
     default:
       logger.log("Unknown type:" + util.inspect(message));
   }
+}
+
+function getAttachments(img) {
+    if (!img) return '';
+
+    let arr = (util.isArray(img)) ? img : [img];
+    let id = String(Date.now());
+    return arr.map((file,idx) => {
+        return {
+            filename: path.basename(file),
+            path: file,
+            cid: id+String(idx)
+        }
+    });
 }
 
 process.on("uncaughtException", function(err) {
